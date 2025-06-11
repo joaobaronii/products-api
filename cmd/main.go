@@ -1,6 +1,7 @@
 package main
 
-// TODO - CRIAR PRODUTO, BUSCAR PRODUTO POR ID
+// TODO - BUSCAR PRODUTO POR ID
+// TODO - README
 
 import (
 	"api-produtos-go/controller"
@@ -25,7 +26,7 @@ func main() {
 	ProductUseCase := usecase.NewProductUseCase(ProductRepository)
 
 	productController := controller.NewProductController(ProductUseCase)
-	
+
 	server.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -33,6 +34,7 @@ func main() {
 	})
 
 	server.GET("/products", productController.GetProducts)
+	server.POST("/product", productController.CreateProduct)
 
 	server.Run(":8080")
 }
