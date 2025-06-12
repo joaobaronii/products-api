@@ -1,8 +1,5 @@
 package main
 
-// TODO - BUSCAR PRODUTO POR ID
-// TODO - README
-
 import (
 	"api-produtos-go/controller"
 	"api-produtos-go/db"
@@ -19,7 +16,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	// defer db.Close() ??
 
 	ProductRepository := repository.NewProductRepository(dbConnetion)
 
@@ -35,6 +31,8 @@ func main() {
 
 	server.GET("/products", productController.GetProducts)
 	server.POST("/product", productController.CreateProduct)
+	server.GET("/product/:product_id", productController.GetProductById)
+	server.DELETE("/product/:product_id", productController.DeleteProduct)
 
-	server.Run(":8080")
+	server.Run(":8000")
 }
